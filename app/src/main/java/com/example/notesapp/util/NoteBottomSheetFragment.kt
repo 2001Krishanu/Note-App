@@ -1,4 +1,4 @@
-package com.codingwithme.notesapp.util
+package com.example.notesapp.util
 
 import android.app.Dialog
 import android.content.Intent
@@ -8,7 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
-import com.codingwithme.notesapp.R
+import com.example.notesapp.R
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import kotlinx.android.synthetic.main.fragment_notes_bottom_sheet.*
@@ -19,7 +19,7 @@ class NoteBottomSheetFragment : BottomSheetDialogFragment() {
 
     companion object {
         var noteId = -1
-        fun newInstance(id:Int): NoteBottomSheetFragment{
+        fun newInstance(id:Int): NoteBottomSheetFragment {
             val args = Bundle()
             val fragment = NoteBottomSheetFragment()
             fragment.arguments = args
@@ -27,6 +27,7 @@ class NoteBottomSheetFragment : BottomSheetDialogFragment() {
             return fragment
         }
     }
+
     override fun setupDialog(dialog: Dialog, style: Int) {
         super.setupDialog(dialog, style)
 

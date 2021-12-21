@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimaryDark"
+
     tools:context=".MainActivity">
 
     <ImageView
@@ -16,10 +16,9 @@
         android:layout_marginBottom="@dimen/_10sdp"
         android:src="@drawable/ic_back"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:tint="@color/ColorWhite" />
+        app:layout_constraintTop_toTopOf="parent"/>
 
-    <ImageView
+   <ImageView
         android:id="@+id/imgDone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -29,7 +28,7 @@
         android:src="@drawable/ic_tick"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:tint="@color/ColorWhite" />
+        />
 
 
     <EditText
@@ -44,9 +43,7 @@
         android:inputType="text"
         android:maxLines="1"
         android:padding="@dimen/_10sdp"
-        android:textColor="@color/ColorWhite"
-        android:textColorHint="@color/ColorGray"
-        android:textSize="@dimen/_14ssp"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/imgBack" />
@@ -64,8 +61,8 @@
         android:fontFamily="@font/manrope_bold"
         android:maxLines="1"
         android:paddingStart="@dimen/_10sdp"
-        android:textColor="@color/ColorGray"
-        android:textColorHint="@color/ColorGray"
+        android:textColor="#FFEB3B"
+        android:textColorHint="#FFEB3B"
         android:textSize="@dimen/_8ssp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -100,9 +97,7 @@
             android:inputType="text"
             android:maxLines="1"
             android:padding="@dimen/_10sdp"
-            android:textColor="@color/ColorWhite"
-            android:textColorHint="@color/ColorGray"
-            android:textSize="@dimen/_10ssp" />
+            android:textSize="15sp"/>
     </LinearLayout>
 
     <RelativeLayout
@@ -150,32 +145,32 @@
         app:layout_constraintTop_toBottomOf="@id/layoutImage"
         android:orientation="vertical">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:orientation="horizontal">
-        <EditText
-            android:id="@+id/etWebLink"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@null"
-            android:fontFamily="@font/manrope_regular"
-            android:hint="@string/web_url"
-            android:inputType="textMultiLine"
-            android:padding="@dimen/_10sdp"
-            android:text="http://"
-            android:textColor="@color/ColorWhite"
-            android:textColorHint="@color/ColorGray"
-            android:textSize="@dimen/_12ssp" />
-        <ImageView
-            android:id="@+id/imgUrlDelete"
-            android:layout_width="@dimen/_24sdp"
-            android:layout_height="@dimen/_24sdp"
-            android:visibility="gone"
-            android:src="@drawable/ic_baseline_cancel_24" />
-    </LinearLayout>
+            android:gravity="center"
+            android:orientation="horizontal">
+            <EditText
+                android:id="@+id/etWebLink"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@null"
+                android:fontFamily="@font/manrope_regular"
+                android:hint="@string/web_url"
+                android:inputType="textMultiLine"
+                android:padding="@dimen/_10sdp"
+                android:text="http://"
+                android:textColor="@color/ColorWhite"
+                android:textColorHint="@color/ColorGray"
+                android:textSize="@dimen/_12ssp" />
+            <ImageView
+                android:id="@+id/imgUrlDelete"
+                android:layout_width="@dimen/_24sdp"
+                android:layout_height="@dimen/_24sdp"
+                android:visibility="gone"
+                android:src="@drawable/ic_baseline_cancel_24" />
+        </LinearLayout>
 
 
 
@@ -245,9 +240,7 @@
         android:hint="@string/notes_desc"
         android:inputType="textMultiLine"
         android:padding="@dimen/_10sdp"
-        android:textColor="@color/ColorWhite"
-        android:textColorHint="@color/ColorGray"
-        android:textSize="@dimen/_12ssp"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvWebLink" />

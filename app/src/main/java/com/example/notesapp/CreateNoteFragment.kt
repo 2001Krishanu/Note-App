@@ -1,47 +1,36 @@
-package com.codingwithme.notesapp
+package com.example.notesapp
 
 import android.Manifest
-import android.app.Activity
 import android.app.Activity.RESULT_OK
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
-import android.content.pm.PackageManager
-import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
-import android.os.PatternMatcher
 import android.provider.MediaStore
+import android.util.Log
 import android.util.Patterns
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
-import androidx.fragment.app.Fragment
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
-import com.codingwithme.notesapp.database.NotesDatabase
-import com.codingwithme.notesapp.entities.Notes
-import com.codingwithme.notesapp.util.NoteBottomSheetFragment
-import com.theartofdev.edmodo.cropper.CropImage
-import com.theartofdev.edmodo.cropper.CropImageView
+import com.example.notesapp.database.NotesDatabase
+import com.example.notesapp.entities.Notes
+import com.example.notesapp.util.NoteBottomSheetFragment
 import kotlinx.android.synthetic.main.fragment_create_note.*
-import kotlinx.android.synthetic.main.fragment_home.*
-import kotlinx.android.synthetic.main.item_rv_notes.view.*
 import kotlinx.coroutines.launch
 import pub.devrel.easypermissions.AppSettingsDialog
 import pub.devrel.easypermissions.EasyPermissions
 import java.text.SimpleDateFormat
 import java.util.*
-import java.util.regex.Pattern
 
 class CreateNoteFragment : BaseFragment(),EasyPermissions.PermissionCallbacks,EasyPermissions.RationaleCallbacks{
 
-    var selectedColor = "#171C26"
+    var selectedColor = "#ffffff"
     var currentDate:String? = null
     private var READ_STORAGE_PERM = 123
     private var REQUEST_CODE_IMAGE = 456
@@ -124,15 +113,27 @@ class CreateNoteFragment : BaseFragment(),EasyPermissions.PermissionCallbacks,Ea
 
         tvDateTime.text = currentDate
 
-        imgDone.setOnClickListener {
+        /*imgDone.setOnClickListener {
             if (noteId != -1){
                 updateNote()
+                Log.d("Key","update callled")
             }else{
                 saveNote()
+                Log.d("Key","save called")
             }
-        }
+        }*/
 
         imgBack.setOnClickListener {
+
+            if (noteId != -1){
+                updateNote()
+                Log.d("Key","update callled")
+            }else{
+                saveNote()
+                Log.d("Key","save called")
+            }
+
+
             requireActivity().supportFragmentManager.popBackStack()
         }
 
@@ -182,6 +183,8 @@ class CreateNoteFragment : BaseFragment(),EasyPermissions.PermissionCallbacks,Ea
     }
 
 
+
+
     private fun updateNote(){
         launch {
 
@@ -224,26 +227,26 @@ class CreateNoteFragment : BaseFragment(),EasyPermissions.PermissionCallbacks,Ea
 
         else{
 
-        launch {
-            var notes = Notes()
-            notes.title = etNoteTitle.text.toString()
-            notes.subTitle = etNoteSubTitle.text.toString()
-            notes.noteText = etNoteDesc.text.toString()
-            notes.dateTime = currentDate
-            notes.color = selectedColor
-            notes.imgPath = selectedImagePath
-            notes.webLink = webLink
-            context?.let {
-                NotesDatabase.getDatabase(it).noteDao().insertNotes(notes)
-                etNoteTitle.setText("")
-                etNoteSubTitle.setText("")
-                etNoteDesc.setText("")
-                layoutImage.visibility = View.GONE
-                imgNote.visibility = View.GONE
-                tvWebLink.visibility = View.GONE
-                requireActivity().supportFragmentManager.popBackStack()
+            launch {
+                var notes = Notes()
+                notes.title = etNoteTitle.text.toString()
+                notes.subTitle = etNoteSubTitle.text.toString()
+                notes.noteText = etNoteDesc.text.toString()
+                notes.dateTime = currentDate
+                notes.color = selectedColor
+                notes.imgPath = selectedImagePath
+                notes.webLink = webLink
+                context?.let {
+                    NotesDatabase.getDatabase(it).noteDao().insertNotes(notes)
+                    etNoteTitle.setText("")
+                    etNoteSubTitle.setText("")
+                    etNoteDesc.setText("")
+                    layoutImage.visibility = View.GONE
+                    imgNote.visibility = View.GONE
+                    tvWebLink.visibility = View.GONE
+                    requireActivity().supportFragmentManager.popBackStack()
+                }
             }
-        }
         }
 
     }
@@ -375,8 +378,10 @@ class CreateNoteFragment : BaseFragment(),EasyPermissions.PermissionCallbacks,Ea
 
     private fun pickImageFromGallery(){
         var intent = Intent(Intent.ACTION_PICK,MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
-        if (intent.resolveActivity(requireActivity().packageManager) != null){
+        //code change
+        if (intent.resolveActivity(requireActivity().packageManager) == null || intent.resolveActivity(requireActivity().packageManager) !=null){
             startActivityForResult(intent,REQUEST_CODE_IMAGE)
+
         }
     }
 
@@ -429,11 +434,11 @@ class CreateNoteFragment : BaseFragment(),EasyPermissions.PermissionCallbacks,Ea
         EasyPermissions.onRequestPermissionsResult(requestCode,permissions,grantResults,requireActivity())
     }
 
-    
+
     override fun onPermissionsDenied(requestCode: Int, perms: MutableList<String>) {
-       if (EasyPermissions.somePermissionPermanentlyDenied(requireActivity(),perms)){
-           AppSettingsDialog.Builder(requireActivity()).build().show()
-       }
+        if (EasyPermissions.somePermissionPermanentlyDenied(requireActivity(),perms)){
+            AppSettingsDialog.Builder(requireActivity()).build().show()
+        }
     }
 
     override fun onPermissionsGranted(requestCode: Int, perms: MutableList<String>) {
@@ -449,4 +454,3 @@ class CreateNoteFragment : BaseFragment(),EasyPermissions.PermissionCallbacks,Ea
     }
 
 }
-

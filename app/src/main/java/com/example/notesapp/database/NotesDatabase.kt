@@ -1,11 +1,11 @@
-package com.codingwithme.notesapp.database
+package com.example.notesapp.database
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.codingwithme.notesapp.dao.NoteDao
-import com.codingwithme.notesapp.entities.Notes
+import com.example.notesapp.dao.NoteDao
+import com.example.notesapp.entities.Notes
 
 @Database(entities = [Notes::class], version = 1, exportSchema = false)
 abstract class NotesDatabase : RoomDatabase() {
@@ -26,5 +26,5 @@ abstract class NotesDatabase : RoomDatabase() {
         }
     }
 
-    abstract fun noteDao():NoteDao
+    abstract fun noteDao(): NoteDao
 }
